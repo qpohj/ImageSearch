@@ -9,12 +9,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Auth0Provider
     domain="dev-iq8asb2sio0birde.us.auth0.com"
-    clientId="FonUUR7sDzWYc3M17WFWonNBO7xqvY72"
+    clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
     authorizationParams={{
       redirect_uri: window.location.origin
     }}
   >
     <App />
-  </Auth0Provider>,
+    </Auth0Provider>
   </React.StrictMode>,
 )
