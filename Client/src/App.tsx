@@ -15,12 +15,12 @@ const App = () => {
     search()
   }, [])
 
-  const { isAuthenticated } = useAuth0() 
+
+  const { isAuthenticated } = useAuth0();
 
   return (
     isAuthenticated ? <LogoutButton /> : <LoginButton />
-    
-
+    // <SearchBar/>
   )
 }
 
