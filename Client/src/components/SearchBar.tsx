@@ -1,17 +1,19 @@
 import { useState } from "react"
 
-
+type SearchBarProps = {
+    onSubmit: (e:any) => void;
+}
 // textfield + button for searching in api
-const SearchBar = () => {
+const SearchBar:React.FC<SearchBarProps> = ({onSubmit}) => {
 
     const [searchInput, setSearchInput] = useState('');
 
-    const handleSearchInput = (event) => {
+    const handleSearchInput = (event:any) => {
         setSearchInput(event.target.value);
     };
 
-    const handleButtonClick = () => {
-        console.log(searchInput);
+    const handleButtonClick  = async () => {
+       onSubmit(searchInput)
     };
 
     return (
