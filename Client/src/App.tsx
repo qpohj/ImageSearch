@@ -5,6 +5,7 @@ import LogoutButton from './components/LogoutButton'
 import { useEffect, useState } from 'react'
 import SearchBar from './components/SearchBar'
 import SearchResult from './components/SearchBarResults'
+import Profile from './components/Profile'
 
 const App = () => {
 
@@ -25,20 +26,21 @@ const App = () => {
     fetch(`http://localhost:3000/api/search?searchQuery=${searchInput}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("data: ", data);
-        setLinks([data])
-    })
+        setLinks(data)
+      })
     
-    
-    //alternativ två hämta ut länkarna här från response    
-    
-    //setLinks([response])
-    
-    //sedan: setLinks(responseLinks)
   }
+
+  if (!isAuthenticated)
+  {
+    return <p>
+      Please login <LoginButton/>
+    </p>
+    }
 
   return (
     <>
+      <Profile/>
       {isAuthenticated ? <LogoutButton /> : <LoginButton />}
       <SearchBar onSubmit={onButtonClick} />
       <SearchResult links={links}/>
