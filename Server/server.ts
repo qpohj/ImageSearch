@@ -36,7 +36,7 @@ app.get("/api/search", async (req: Request, res: Response, next: NextFunction) =
 
 
 app.post('/api/user/images', (req, res) => {
-    
+    /// GÖR EN POST FUNKTION FÖR DATA IFRÅN CLIENT
     const response = {
         
     }
