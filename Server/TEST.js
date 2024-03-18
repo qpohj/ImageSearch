@@ -4,8 +4,6 @@
 //     {
 //         "user": "Pontus",
 //         "favoriteIMG":
-
-
 //             [
 //                 {
 //                     "title": "Pretty Cow",

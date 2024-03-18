@@ -18,6 +18,10 @@ const SearchBar:React.FC<SearchBarProps> = ({onSubmit}) => {
 
     return (
         <>
+            {/* <script async src="https://cse.google.com/cse.js?cx=c244fc5dc3f57416b">
+            </script>
+            <div className="gcse-search"></div> */}
+           
             <input
                 type="text"
                 value={searchInput}
