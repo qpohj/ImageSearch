@@ -31,6 +31,10 @@ const App = () => {
     
   }
 
+  const saveImage = async (saveImgData: any) => {
+
+  }
+
   if (!isAuthenticated)
   {
     return <p>

@@ -36,14 +36,28 @@ app.get("/api/search", async (req: Request, res: Response, next: NextFunction) =
 
 
 app.post('/api/user/images', (req, res) => {
-    /// GÖR EN POST FUNKTION FÖR DATA IFRÅN CLIENT
-    const response = {
-        
-    }
+    try {
+        // Your code for saving user images goes here
 
-    console.log(response);
-    res.status(201).json(req.body)
-})
+
+
+        // For example:
+        // Save image data
+        // const savedImageData = saveImage(req.body);
+
+        // Log success or any other relevant information
+        console.log('Image saved successfully:', savedImageData);
+
+        // Respond with a success message or appropriate data
+        res.status(201).json({ message: 'Image saved successfully', data: savedImageData });
+    } catch (error) {
+        // If an error occurs during image saving process, handle it here
+        console.error('Error saving image:', error);
+
+        // Respond with an error message and appropriate status code
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 app.listen(3000, () => console.log("Server is up and running..."))

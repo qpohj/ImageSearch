@@ -17,7 +17,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
     };
 
     const clickedImage = () => {
-
+        
     };
 
 
