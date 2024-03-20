@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { SetStateAction, useState } from "react"
 
 
 // textfield + button for searching in api
@@ -6,21 +6,19 @@ const SearchBar = () => {
 
     const [searchInput, setSearchInput] = useState('');
 
-    const handleSearchInput = (event) => {
+    const handleSearchInput = (event: { target: { value: SetStateAction<string>; }; }) => {
         setSearchInput(event.target.value);
     };
 
     const handleButtonClick = () => {
-        console.log(searchInput);
+        // when clicked submit 
     };
 
     return (
         <>
             <input
                 type="text"
-                value={searchInput}
                 onChange={handleSearchInput}
-                placeholder="Enter text here"
             />
             <button onClick={handleButtonClick}>Search</button>
         </>
