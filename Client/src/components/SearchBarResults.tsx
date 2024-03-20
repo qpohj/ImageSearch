@@ -8,7 +8,11 @@ const SearchResult: React.FC<SearchResultProps> = ({ links }) => {
     return (
         <div>
             {links.map(link => {
-                return <img src={link} width={200} height={200}/>
+                return (
+                    <>
+                        <img src={link} width={200} height={200} />
+                    </>
+                )
             })}
         </div>   
     )

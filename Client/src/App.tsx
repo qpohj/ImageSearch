@@ -6,20 +6,12 @@ import { useEffect, useState } from 'react'
 import SearchBar from './components/SearchBar'
 import SearchResult from './components/SearchBarResults'
 import Profile from './components/Profile'
+import SearchInfo from './components/SearchInfo'
 
 const App = () => {
-
-  // useEffect(() => {
-  //   const search = async () => {
-  //     const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${import.meta.env.VITE_GOOGLE_API_KEY}&cx=${import.meta.env.VITE_SEARCH_ENGINE_ID}&num=10&searchType=image&q=cow`)
-  //     const data = await response.json() 
-  //     console.log(data);
-  //   }
-  //   search()
-  // }, [])
-
   const { isAuthenticated } = useAuth0();
   const [links, setLinks] = useState<Array<string>>([]);
+  const [searchData, setSearchData] = useState();
 
   const onButtonClick = async (searchInput:any) => {
     
@@ -29,10 +21,6 @@ const App = () => {
         setLinks(data)
       })
     
-  }
-
-  const saveImage = async (saveImgData: any) => {
-
   }
 
   if (!isAuthenticated)
@@ -47,7 +35,8 @@ const App = () => {
       <Profile/>
       {isAuthenticated ? <LogoutButton /> : <LoginButton />}
       <SearchBar onSubmit={onButtonClick} />
-      <SearchResult links={links}/>
+      <SearchResult links={links} />
+      <SearchInfo/>
   </>
   )
 }

@@ -3,29 +3,28 @@ import cors from 'cors';
 import axios from 'axios';
 import dotenv from 'dotenv';
 
-const { userPictureSchema } = require("./schemas/user.schema.js");
-const { validate } = require("./schemas/validate.js");
-
 dotenv.config();
-
 const app = express();
 
 app.use(cors({
     origin: "http://localhost:5173"
 }))
 app.use(express.json())
+
+
 app.get("/api/search", async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Make a GET request to the external API
-
-        // console.log(process.env.VITE_GOOGLE_API_KEY);
         const response = await axios.get(`https://www.googleapis.com/customsearch/v1?key=${process.env.VITE_GOOGLE_API_KEY}&cx=${process.env.VITE_SEARCH_ENGINE_ID}&num=10&searchType=image&q=${req.query.searchQuery}`);
-
-        let picture = response.data.items.map((item: string) => item.link);        
         
-        console.log(response.data.items);
-        console.log(picture);
-        res.status(200).json(picture);
+        //print out searchInformation from Response FOR SEARCH RESULTS
+        let searchResult = response.data.searchInformation;
+
+        console.log("-----This is Search Results -----");
+        console.log(searchResult);
+
+        let pictures = response.data.items.map((item: string) => item.link);
+        res.status(200).json(pictures);
         next()
     } catch (error) {
         // Handle errors
@@ -35,29 +34,55 @@ app.get("/api/search", async (req: Request, res: Response, next: NextFunction) =
 });
 
 
-app.post('/api/user/images', (req, res) => {
+//Get user
+app.get('/api/user', async (req, res, next) => {
     try {
-        // Your code for saving user images goes here
-
-
-
-        // For example:
-        // Save image data
-        // const savedImageData = saveImage(req.body);
-
-        // Log success or any other relevant information
-        console.log('Image saved successfully:', savedImageData);
-
-        // Respond with a success message or appropriate data
-        res.status(201).json({ message: 'Image saved successfully', data: savedImageData });
+        console.log(res.json())
+        next()
     } catch (error) {
         // If an error occurs during image saving process, handle it here
-        console.error('Error saving image:', error);
+        console.error('Error getting user:', error);
+
+        // Respond with an error message and appropriate status code
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+})
+//Create user
+app.post('/api/user', async (req, res) => {
+    try {
+ 
+    } catch (error) {
+        // If an error occurs during image saving process, handle it here
+        console.error('Error creating user:', error);
 
         // Respond with an error message and appropriate status code
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+//get user favorites
+app.get('/api/user/{userId}/favorites', async (req, res) => {
+    try {
+ 
+    } catch (error) {
+        // If an error occurs during image saving process, handle it here
+        console.error('Error getting user favorites:', error);
 
+        // Respond with an error message and appropriate status code
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+//create new favorite for user
+app.post('/api/user/{userId}/favorites', async (req, res) => {
+    try {
+ 
+    } catch (error) {
+        // If an error occurs during image saving process, handle it here
+        console.error('Error creating new favorite image:', error);
+
+        // Respond with an error message and appropriate status code
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
 
 app.listen(3000, () => console.log("Server is up and running..."))

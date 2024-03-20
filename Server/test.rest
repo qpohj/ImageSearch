@@ -1,7 +1,5 @@
-POST  http://localhost:3000/api/user/images
-Content-Type: application/json
+POST http://localhost:3000/api/user
 
 {
-    "user": "Pontus",
-    "favoriteIMG": "blalbla"
+    "name": "Pontus"
 }
