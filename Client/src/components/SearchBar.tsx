@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { SetStateAction, useState } from "react"
 
 type SearchBarProps = {
     onSearchSubmit: (e:any) => void;
@@ -22,7 +22,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchSubmit }) => {
         <> 
             <input
                 type="text"
-                value={searchInput}
                 onChange={handleSearchInput}
             />
             <button onClick={handleButtonClick}>Search</button>
