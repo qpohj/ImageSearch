@@ -7,20 +7,29 @@ import SearchBar from './components/SearchBar'
 import SearchResult from './components/SearchBarResults'
 import Profile from './components/Profile'
 import SearchInfo from './components/SearchInfo'
+import SavedImages from './components/SavedImages'
 
 const App = () => {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const [links, setLinks] = useState<Array<string>>([]);
-  const [searchData, setSearchData] = useState();
+  const [searchData, setSearchData] = useState(); 
+  const [imageLinks, setImageLinks] = useState<Array<string>>([]);
 
-  const onButtonClick = async (searchInput:any) => {
+  
+
+  const onButtonClick = (searchInput: any) => {
     
     fetch(`http://localhost:3000/api/search?searchQuery=${searchInput}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setLinks(data)
+      .then(res => res.json())
+      .then((data : any) => {
+        console.log(data.searchData)
+        setLinks(data.pictures)
+        setSearchData(data.searchData)
       })
-    
+  }
+
+  const addImageToList = (link: string) => {      
+    setImageLinks(old => [...old, link]);
   }
 
   if (!isAuthenticated)
@@ -34,9 +43,10 @@ const App = () => {
     <>
       <Profile/>
       {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-      <SearchBar onSubmit={onButtonClick} />
-      <SearchResult links={links} />
-      <SearchInfo/>
+      <SearchInfo searchInfo={searchData} />
+      <SearchBar onSearchSubmit={onButtonClick} />
+      <SearchResult links={links} addImageToList={addImageToList} />
+      <SavedImages user={user!} imageLinks={imageLinks} />   
   </>
   )
 }

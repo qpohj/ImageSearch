@@ -1,12 +1,12 @@
 import { useState } from "react"
 
 type SearchBarProps = {
-    onSubmit: (e:any) => void;
+    onSearchSubmit: (e:any) => void;
 }
 
 
 // textfield + button for searching in api
-const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearchSubmit }) => {
 
     const [searchInput, setSearchInput] = useState('');
 
@@ -14,8 +14,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
         setSearchInput(event.target.value);
     };
 
-    const handleButtonClick = async () => {
-        onSubmit(searchInput)
+    const handleButtonClick = () => {
+        onSearchSubmit(searchInput)
     };
 
     return (
@@ -26,6 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
                 onChange={handleSearchInput}
             />
             <button onClick={handleButtonClick}>Search</button>
+            {/* {response.spelling && <span onClick={()=>{}}>Did you mean?{response.correctedQuery}?</span>} */}
         </>
     )
 }

@@ -9,9 +9,8 @@ const app = express();
 app.use(cors({
     origin: "http://localhost:5173"
 }))
+
 app.use(express.json())
-
-
 app.get("/api/search", async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Make a GET request to the external API
@@ -20,12 +19,12 @@ app.get("/api/search", async (req: Request, res: Response, next: NextFunction) =
         //print out searchInformation from Response FOR SEARCH RESULTS
         let searchResult = response.data.searchInformation;
 
-        console.log("-----This is Search Results -----");
-        console.log(searchResult);
-
         let pictures = response.data.items.map((item: string) => item.link);
-        res.status(200).json(pictures);
-        next()
+        let myData = {
+            pictures: pictures,
+            searchData: searchResult
+        }
+        res.status(200).json(myData);
     } catch (error) {
         // Handle errors
         console.error('Error fetching data:', error);
@@ -35,47 +34,25 @@ app.get("/api/search", async (req: Request, res: Response, next: NextFunction) =
 
 
 //Get user
-app.get('/api/user', async (req, res, next) => {
-    try {
-        console.log(res.json())
-        next()
-    } catch (error) {
-        // If an error occurs during image saving process, handle it here
-        console.error('Error getting user:', error);
+// app.get('/api/user', async (req, res, next) => {
+//     try {
 
-        // Respond with an error message and appropriate status code
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+//         console.log(res.json())
+//         next()
+//     } catch (error) {
 
-})
-//Create user
-app.post('/api/user', async (req, res) => {
-    try {
- 
-    } catch (error) {
-        // If an error occurs during image saving process, handle it here
-        console.error('Error creating user:', error);
+//         console.error('Error getting user:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
 
-        // Respond with an error message and appropriate status code
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-//get user favorites
-app.get('/api/user/{userId}/favorites', async (req, res) => {
-    try {
- 
-    } catch (error) {
-        // If an error occurs during image saving process, handle it here
-        console.error('Error getting user favorites:', error);
+// })
 
-        // Respond with an error message and appropriate status code
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-})
 //create new favorite for user
-app.post('/api/user/{userId}/favorites', async (req, res) => {
+app.post('/api/favorites', async (req, res) => {
     try {
- 
+        const jsonData = req.body;
+
+        console.log(jsonData);
     } catch (error) {
         // If an error occurs during image saving process, handle it here
         console.error('Error creating new favorite image:', error);
