@@ -2,44 +2,52 @@ import { useAuth0 } from '@auth0/auth0-react'
 import './App.css'
 import LoginButton from './components/LoginButton'
 import LogoutButton from './components/LogoutButton'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import SearchBar from './components/SearchBar'
+import SearchResult from './components/SearchBarResults'
 import Profile from './components/Profile'
+import SearchInfo from './components/SearchInfo'
+import SavedImages from './components/SavedImages'
 
 const App = () => {
+  const { user, isAuthenticated } = useAuth0();
+  const [links, setLinks] = useState<Array<string>>([]);
+  const [searchData, setSearchData] = useState(); 
+  const [imageLinks, setImageLinks] = useState<Array<string>>([]);
 
-  useEffect(() => {
-    const search = async () => {
-      const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${import.meta.env.VITE_GOOGLE_API_KEY}&cx=${import.meta.env.VITE_SEARCH_ENGINE_ID}&num=10&searchType=image&q=cow`)
-      const data = await response.json()
-      console.log(data);
+  
+
+  const onButtonClick = (searchInput: any) => {
+    
+    fetch(`http://localhost:3000/api/search?searchQuery=${searchInput}`)
+      .then(res => res.json())
+      .then((data : any) => {
+        console.log(data.searchData)
+        setLinks(data.pictures)
+        setSearchData(data.searchData)
+      })
+  }
+
+  const addImageToList = (link: string) => {      
+    setImageLinks(old => [...old, link]);
+  }
+
+  if (!isAuthenticated)
+  {
+    return <p>
+      Please login <LoginButton/>
+    </p>
     }
-    search()
-  }, [])
-
-  //  function hndlr(response) {
-  //     for (var i = 0; i < response.items.length; i++) {
-  //       var item = response.items[i];
-  //       // Make sure HTML in item.htmlTitle is escaped.
-  //         document.getElementById("content").append(
-  //         document.createElement("br"),
-  //         document.createTextNode(item.htmlTitle)
-  //       );
-  //     }
-  //   }
-
-
-
-  const { isAuthenticated } = useAuth0();
 
   return (
     <>
       <Profile/>
       {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-      <SearchBar/>
+      <SearchInfo searchInfo={searchData} />
+      <SearchBar onSearchSubmit={onButtonClick} />
+      <SearchResult links={links} addImageToList={addImageToList} />
+      <SavedImages user={user!} imageLinks={imageLinks} />   
   </>
-
-  
   )
 }
 

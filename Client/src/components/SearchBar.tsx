@@ -1,28 +1,32 @@
 import { SetStateAction, useState } from "react"
 
+type SearchBarProps = {
+    onSearchSubmit: (e:any) => void;
+}
+
 
 // textfield + button for searching in api
-const SearchBar = () => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearchSubmit }) => {
 
     const [searchInput, setSearchInput] = useState('');
 
-    const handleSearchInput = (event: { target: { value: SetStateAction<string>; }; }) => {
+    const handleSearchInput = (event: any) => {
         setSearchInput(event.target.value);
     };
 
     const handleButtonClick = () => {
-        // when clicked submit 
+        onSearchSubmit(searchInput)
     };
 
     return (
-        <>
+        <> 
             <input
                 type="text"
                 onChange={handleSearchInput}
             />
             <button onClick={handleButtonClick}>Search</button>
+            {/* {response.spelling && <span onClick={()=>{}}>Did you mean?{response.correctedQuery}?</span>} */}
         </>
     )
 }
-
 export default SearchBar;
