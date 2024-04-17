@@ -1,13 +1,13 @@
 import { useAuth0 } from '@auth0/auth0-react'
+import { useState } from 'react'
 import './App.css'
-import LoginButton from './components/LoginButton'
-import LogoutButton from './components/LogoutButton'
-import { useEffect, useState } from 'react'
+import SavedImages from './components/SavedImages'
 import SearchBar from './components/SearchBar'
 import SearchResult from './components/SearchBarResults'
-import Profile from './components/Profile'
 import SearchInfo from './components/SearchInfo'
-import SavedImages from './components/SavedImages'
+import LoginButton from './components/auth0/LoginButton'
+import LogoutButton from './components/auth0/LogoutButton'
+import Profile from './components/auth0/Profile'
 
 const App = () => {
   const { user, isAuthenticated } = useAuth0();

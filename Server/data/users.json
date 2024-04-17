@@ -1,0 +1,11 @@
+{
+    "user": "fakeuser",
+    "favoriteImages": [
+        {
+            "Title": "title",
+            "byteSize": 2314,
+            "url": "http://"
+        }
+    ]
+}
+
