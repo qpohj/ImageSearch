@@ -1,18 +1,10 @@
-const Joi = require("joi");
-
-// Define Joi schema for FavoriteImage
-const favoriteImageSchema = Joi.object({
-    Title: Joi.string().required(),
-    byteSize: Joi.number().required(),
-    url: Joi.string().uri().required()
-});
+import Joi from 'joi';
 
 // Define Joi schema for User
-const userSchema = Joi.object({
-    user: Joi.string().required(),
-    favoriteImages: Joi.array().items(favoriteImageSchema)
+export const userSchema = Joi.object({
+    userId: Joi.string().length(32).required(),
+    favoriteImages: Joi.array().required()
 });
-
 
 /* Example Data
 const userData: User = {
@@ -26,6 +18,3 @@ const userData: User = {
     ]
 };
 */
-
-
-module.exports = favoriteImageSchema, userSchema

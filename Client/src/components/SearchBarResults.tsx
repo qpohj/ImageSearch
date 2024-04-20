@@ -11,7 +11,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ links, addImageToList }) =>
     const { user } = useAuth0()
     
     const onImageClick:any = async (link:any) => {
-        await axios.post(`http://localhost:3000/api/favorites`, { pinnedCowUrl: link, nickname: user?.nickname  })
+        await axios.post(`http://localhost:3000/api/user:Id/favorites`, { pinnedCowUrl: link, nickname: user?.nickname  })
     }
 
     // return json data - link: from google api call.
