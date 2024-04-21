@@ -33,6 +33,8 @@ export const read = async (): Promise<UserData | undefined> => {
         // Read the data from the users.json file
         const rawData = await fs.readFile('./data/users.json', 'utf-8');
 
+        console.log(rawData)
+
         // Parse the JSON data
         const data = JSON.parse(rawData);
 

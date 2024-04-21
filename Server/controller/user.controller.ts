@@ -13,7 +13,7 @@ export const getUser = async (
         if (!user) {
             return response.status(404).json({ message: 'User not found' });
         }
-        response.status(200).json({ user });
+        response.status(200).json(user);
     } catch (error) {
         console.error('Error fetching user:', error);
         response.status(500).json({ error: 'Error fetching user' });
@@ -36,7 +36,7 @@ export const createUser = async (
         response.status(201).json({ user: createdUser });
     } catch (error) {
         console.error('Failed to create user:', error);
-        response.status(500).json({ error: 'Failed to create user' });
+        response.status(500).json(error);
     }
 };
 
