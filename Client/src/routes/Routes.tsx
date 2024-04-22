@@ -1,18 +1,15 @@
 import { RouteObject } from 'react-router';
-import LoginButton from '../components/auth0/LoginButton';
+import HomeView from '../view/HomeView';
+import ProfileView from '../view/ProfileView';
 import SearchView from '../view/SearchView';
 
-const Routes = () => {
-    const routes: Array<RouteObject> = [
-        {
-            path: '/',
-            element: <LoginButton />
-        },
-        { path: '/search', element: <SearchView /> },
-        { path: '/dashboard', element: <LoginButton /> }
-    ];
+const routes: Array<RouteObject> = [
+    {
+        path: '/',
+        element: <HomeView />
+    },
+    { path: '/search', element: <SearchView /> },
+    { path: '/dashboard', element: <ProfileView /> }
+];
 
-    return routes;
-};
-
-export default Routes;
+export default routes;

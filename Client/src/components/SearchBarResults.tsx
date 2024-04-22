@@ -13,8 +13,9 @@ const SearchResult: React.FC<SearchResultProps> = ({
     const { user } = useAuth0();
 
     const onImageClick: any = async (link: any) => {
-        await axios.post(`http://localhost:3000/api/user:Id/favorites`, {
-            pinnedCowUrl: link,
+        await axios.post(`http://localhost:3000/user/favorite/create/userId/`, {
+
+            pinnedImageUrl: link,
             nickname: user?.nickname
         });
     };

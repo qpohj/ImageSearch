@@ -1,6 +1,18 @@
+import { useAuth0 } from '@auth0/auth0-react';
+import Navbar from '../components/NavBar';
+import Profile from '../components/auth0/Profile';
+
 const ProfileView = () => {
-    return <div>Hello</div>;
-    // sida där användaren och dens sparade bilder ska synnas.
+    const { user } = useAuth0();
+    
+
+    return (
+        <div>
+            <Navbar />
+            <p>ProfileView</p>
+            <Profile />
+        </div>
+    );
 };
 
 export default ProfileView;

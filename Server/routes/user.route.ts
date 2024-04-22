@@ -6,7 +6,7 @@ const userRouter = express.Router();
 
 initDB();
 
-userRouter.get('/getUser/:userId', userController.getUser);
+userRouter.get('/get/:userId', userController.getUser);
 userRouter.post('/create', userController.createUser);
 userRouter.put('/update/:userId', userController.updateUser);
 userRouter.delete('/delete/:userId', userController.deleteUser);
